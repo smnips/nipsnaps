@@ -6,14 +6,14 @@
     <title>Nips-Naps</title>
     <style>
       :root {
-        color-scheme: dark;
+        color-scheme: light;
       }
 
       body {
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
-        background: linear-gradient(135deg, #0f172a, #111827);
-        color: #f8fafc;
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        color: #0f172a;
         min-height: 100vh;
         display: grid;
         place-items: center;
@@ -22,11 +22,11 @@
 
       .card {
         width: min(900px, 100%);
-        background: rgba(15, 23, 42, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.95);
+        border: 1px solid rgba(15, 23, 42, 0.12);
         border-radius: 24px;
         padding: 2rem;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 20px 50px rgba(15, 23, 42, 0.12);
       }
 
       h1 {
@@ -37,6 +37,35 @@
       h2 {
         margin: 1.5rem 0 1rem;
         font-size: clamp(1.25rem, 2vw, 1.6rem);
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+        gap: 1.5rem;
+        align-items: start;
+        margin-top: 1.5rem;
+      }
+
+      .info-panel {
+        background: #f8fafc;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        border-radius: 16px;
+        padding: 1.25rem;
+      }
+
+      .info-panel h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1.25rem;
+      }
+
+      .info-panel p {
+        margin: 0;
+        line-height: 1.7;
+      }
+
+      .video-panel {
+        min-width: 0;
       }
 
       .video-wrap {
@@ -51,17 +80,33 @@
         height: auto;
         object-fit: cover;
       }
+
+      @media (max-width: 760px) {
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
     <main class="card">
       <h1>Nips-Naps</h1>
-      <h2>See how this works</h2>
-      <div class="video-wrap">
-        <video autoplay muted loop playsinline preload="auto">
-          <source src="assets/IMG_E1064.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <h2>Näin Nips-Naps-työkalu toimii</h2>
+      <div class="content-grid">
+        <section class="info-panel" aria-labelledby="background-title">
+          <h2 id="background-title">Taustatietoa</h2>
+          <p>
+            Vähäkyröläiseltä viidennen polven pläkkisepältä Oskari Tuomiselta voit nyt tilata uudenlaisen etusormella käytettävän mansikan perkaamiseen soveltuvan työkalun Nips-Naps, jonka Patentti- ja rekisterihallitus suojasi hyödyllisyysmallilla eli pikkupatentilla maaliskuussa 2026. Työkalu tekee mansikan perkaamisesta nopeaa, siistiä, helppoa ja hauskaa. Mansikan kanta irtoaa sekunnissa, eikä mansikkaa hukkaannu lainkaan.
+          </p>
+        </section>
+        <div class="video-panel">
+          <div class="video-wrap">
+            <video autoplay muted loop playsinline preload="auto">
+              <source src="assets/IMG_E1064.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
       </div>
     </main>
   </body>
