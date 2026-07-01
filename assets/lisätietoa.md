@@ -1,4 +1,4 @@
-Laitteen toiminta selviää oiheisesta videosta.
+Laitteen toiminta selviää oheisesta videosta.
 
 Voit tilata Nips-Naps-työkalun sähköpostiosoitteesta nipsnaps2026@gmail.com tai soittamalla/tekstiviestillä/WhatsApp-viestillä numerosta 040 591 1573.
 
