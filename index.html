@@ -127,17 +127,71 @@
         </div>
         <section class="details-panel" aria-labelledby="details-title">
           <h2 id="details-title">Lisätietoa</h2>
-          <p>Laitteen toiminta selviää yllä olevasta videosta.</p>
-          <p>Voit tilata Nips-Naps-työkalun sähköpostiosoitteesta nipsnaps2026@gmail.com tai soittamalla/tekstiviestillä/WhatsApp-viestillä numerosta 040 591 1573.</p>
-          <p>Hinta 10 € + postikulut (3,5 €) sisältää kaksi työkalua, isomman miesten version ja pienemmän naisten ja lasten sormiin sopivan mallin. Kummankin työkalun koko säätyy näppärästi sormen kokoon sopivaksi.</p>
-          <p>Lisätietoa Nips-Naps-työkalusta voit lukea Tekniikka&amp;Talous-lehden ja Kauppalehden artikkeleista:</p>
-          <ul>
-            <li><a href="https://www.tekniikkatalous.fi/uutiset/a/351d9e68-e5d6-4958-b2de-15fe66b17b2b" target="_blank" rel="noopener">Tekniikka &amp; Talous</a></li>
-            <li><a href="https://www.tekniikkatalous.fi/uutiset/a/6d04fb58-b3a2-40e9-bfe2-35ee2ddf3fdd" target="_blank" rel="noopener">Tekniikka &amp; Talous</a></li>
-            <li><a href="https://www.kauppalehti.fi/uutiset/a/d636f5c0-98e2-4212-935a-58185825c30a" target="_blank" rel="noopener">Kauppalehti</a></li>
-          </ul>
+          <div id="details-content"></div>
         </section>
       </div>
     </main>
+    <script>
+      async function loadDetailsContent() {
+        const container = document.getElementById('details-content');
+        if (!container) return;
+
+        try {
+          const response = await fetch('assets/lisätietoa.md');
+          if (!response.ok) throw new Error('Unable to load markdown content');
+          const markdown = await response.text();
+          container.innerHTML = renderMarkdown(markdown);
+        } catch (error) {
+          container.innerHTML = '<p>Lisätietoa ei ole saatavilla juuri nyt.</p>';
+        }
+      }
+
+      function renderMarkdown(markdown) {
+        const lines = markdown.split(/\r?\n/);
+        let html = '';
+        let inList = false;
+
+        const flushList = () => {
+          if (inList) {
+            html += '</ul>';
+            inList = false;
+          }
+        };
+
+        const renderInline = (text) => {
+          const escaped = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+          return escaped.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+        };
+
+        lines.forEach((line) => {
+          const trimmed = line.trim();
+
+          if (!trimmed) {
+            flushList();
+            return;
+          }
+
+          if (trimmed.startsWith('- ')) {
+            if (!inList) {
+              html += '<ul>';
+              inList = true;
+            }
+            html += `<li>${renderInline(trimmed.slice(2))}</li>`;
+            return;
+          }
+
+          flushList();
+          html += `<p>${renderInline(trimmed)}</p>`;
+        });
+
+        flushList();
+        return html;
+      }
+
+      loadDetailsContent();
+    </script>
   </body>
 </html>
