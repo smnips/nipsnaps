@@ -1,5 +1,5 @@
 # nipsnaps
 
-Tämä staattinen kotisivu Nips-Naps -tuotteen mainostamiseen. Ole kiltti äläkä hyödynnä materiaaleja muihin kaupallisiin tarkoituksiin.
+Tämä on staattinen nettisivu Nips-Naps -tuotteen mainostamiseen.
 
-Nettisivut löytyvät osoitteesta https://smnips.github.io/nipsnaps/
+Nettisivut löytyvät osoitteesta https://nips-naps.fi/
